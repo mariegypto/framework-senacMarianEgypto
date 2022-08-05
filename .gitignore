@@ -1,0 +1,3 @@
+//arquivos que não queremos que suba pro GIT. Não subir toneladas de log, por exemplo.  git add -f(força a subir tudo)
+.env
+vendor
