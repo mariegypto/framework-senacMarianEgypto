@@ -1,3 +1,5 @@
-//arquivos que não queremos que suba pro GIT. Não subir toneladas de log, por exemplo.  git add -f(força a subir tudo)
-.env
-vendor
+//Gitignore: arquivos que não queremos que suba pro GIT. Não subir toneladas de log, por exemplo.  git add -f(força a subir tudo)
+.env 
+//env: possuem informações sigilosas. Existem variaveis de ambiente nas aplicações, elas não mudam e tem que ser acessadas por toda aplicação. 
+//Nós colocamos ela num arquivo .env. O env vai guardar ocnexão de banco de dados, da api do governo ou de uma empresa que tenha integração conosco.
+vendor //onde o composer vai instalar os scripts que vamos baixar
