@@ -8,6 +8,9 @@ class ProcessServerElements {
 
     private $documentRoot;
     private $serverName;
+    private $httpHost;
+    private $uri;
+    private $variables;
     private function __construct(){//construtor privado pois nao quero dar new nele em outro lugar
         //SINGLETON: utilizando classe mantem o acesso a essa classe de maneira global, querendo acessar os objetos de diferentes ponto do sistema
 
@@ -38,5 +41,30 @@ class ProcessServerElements {
 
     public function getServerName(){
         return $this->serverName;
+    }
+
+    public function setHttpHost($httpHost){
+        $this->httpHost =  $httpHost;
+    }
+
+    public function getHttpHost(){
+        return $this->httpHost;
+    }
+
+    public function setUri($uri){
+        $this->uri =  $uri;
+    }
+
+    public function getUri(){
+        return $this->uri;
+    }
+
+    
+    public function setVariables($variables){
+        $this->variables =  $variables;
+    }
+
+    public function getVariables(){
+        return $this->uri;
     }
 }
