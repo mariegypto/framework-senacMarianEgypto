@@ -14,10 +14,15 @@ trait BreakStringInVars{//Trait para quando tem duas classes usando o mesmo mét
 
         $arrayWithVars = explode("&", $stringWithVars);
 
-        $varsOfUrl = array_map(function($element){
-            return explode("=",$element);
+        /*$varsOfUrl =*/ return array_map(function($element){
+            $nameAndValue = explode 
+            ("=",$element);
+            return [
+                "name" => $nameAndValue[0],
+                "value" => $nameAndValue[1]
+            ];
         },$arrayWithVars);
 
-        DD(VarsOfUrl);//php para funções não é case sensitive
+        //DD($varsOfUrl);//php para funções não é case sensitive
     }
 }
