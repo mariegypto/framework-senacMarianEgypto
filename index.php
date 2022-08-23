@@ -16,14 +16,17 @@ require_once("{$mainPosition}\helper\helper.php");
 require_once("{$mainPosition}\\vendor\autoload.php");
 
 
-use Bootstrap\Env;
+use Bootstrap\Env;//use é equivalente ao require, se não der o use o pc nao vai saber que vc ta usando a classe
 use App\FrameworkTools\ProcessServerElements;
 use App\FrameworkTools\Implementation\FactoryMethods\FactoryProcessServerElement;
+use App\FrameworkTools\Implementation\Route\RouteProcess;
 
 Env::execute();//executa o codigo da classe env
 
 
 $factoryProcessServerElement = new FactoryProcessServerElement();
 $factoryProcessServerElement->operation();
-$processServerElements = ProcessServerElements::start();
-dd($processServerElements);//para teste, roda e morre
+//$processServerElements = ProcessServerElements::start();
+
+RouteProcess::execute();
+//dd($processServerElements);//para teste, roda e morre

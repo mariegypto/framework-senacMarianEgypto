@@ -29,7 +29,8 @@ class FactoryProcessServerElement extends AbstractFactoryMethods {
 
         $this->processServerElements->setVariables($variables);
         $this->processServerElements->setVerb($_SERVER['REQUEST_METHOD']);
-        dd($this->processServerElements);
+        $this->processServerElements->setRoute(explode("?",$_SERVER['REQUEST_URI'])[0]);//quebra uma String em um array
+        //dd($this->processServerElements);// nao tem utilidade prática
     }
 }
 

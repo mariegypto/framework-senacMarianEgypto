@@ -7,3 +7,7 @@ function dd($input){ //mostra a variavel e mata o código ao invocar ela, da um 
 function env($nameOfVariable){
     return $_ENV[$nameOfVariable];
 }
+
+function view($input){
+    echo json_encode($input);
+}

@@ -12,6 +12,7 @@ class ProcessServerElements {
     private $uri;
     private $variables;
     private $verb;
+    private $route;
 
     private function __construct(){//construtor privado pois nao quero dar new nele em outro lugar
         //SINGLETON: utilizando classe mantem o acesso a essa classe de maneira global, querendo acessar os objetos de diferentes ponto do sistema
@@ -67,7 +68,7 @@ class ProcessServerElements {
     }
 
     public function getVariables(){
-        return $this->uri;
+        return $this->variables;
     }
 
     public function setVerb($verb){
@@ -76,5 +77,13 @@ class ProcessServerElements {
 
     public function getVerb(){
         return $this->verb;
+    }
+
+    public function setRoute($route){
+        $this->route =  $route;
+    }
+
+    public function getRoute(){
+        return $this->route;
     }
 }
