@@ -11,6 +11,9 @@ $mainPosition = __DIR__;//constante do php que contem a posição do meu reposit
 
 //dd(__DIR__); //metofd magico a posicao do diretorio,
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
+
 
 require_once("{$mainPosition}\helper\helper.php");
 require_once("{$mainPosition}\\vendor\autoload.php");
