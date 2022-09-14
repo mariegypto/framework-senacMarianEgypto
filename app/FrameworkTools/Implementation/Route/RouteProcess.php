@@ -6,6 +6,10 @@ use App\FrameworkTools\ProcessServerElements;
 
 use App\Controllers\HelloWorldController;
 
+use App\Controllers\TrainQueryController;
+
+use App\Controllers\InsertDataController;
+
 class RouteProcess{
 
     public static function execute(){
@@ -17,7 +21,17 @@ class RouteProcess{
                    case '/hello-world':
                     return (new HelloWorldController)->execute(); 
                    break;
+
+                   case '/train-query':
+                    return(new TrainQueryController)->execute();
+                    break;
                 }
+            case 'POST':
+                switch($processServerElements->getRoute()){
+                    case '/insert-data':
+                     return (new InsertDataController)->exec();
+                    break;
+                 }
         }
     }
 }
