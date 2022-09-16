@@ -4,7 +4,6 @@ namespace App\FrameworkTools\Implementation\FactoryMethods;
 
 use App\FrameworkTools\Abstracts\FactoryMethods\AbstractFactoryMethods;
 use App\FrameworkTools\ProcessServerElements;
-
 use App\FrameworkTools\Implementation\FactoryMethods\BreakStringInVars;
 
 class FactoryProcessServerElement extends AbstractFactoryMethods {
@@ -18,6 +17,7 @@ class FactoryProcessServerElement extends AbstractFactoryMethods {
     }
 
     public function operation(){
+
         //dd($_SERVER);
         $this->processServerElements->setDocumentRoot($_SERVER['DOCUMENT_ROOT']);
         $this->processServerElements->setServerName($_SERVER['SERVER_NAME']);
