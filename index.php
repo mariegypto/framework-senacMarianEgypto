@@ -1,7 +1,7 @@
 <?php
 
 $mainPosition = __DIR__;//constante do php que contem a posição do meu repositorio
-
+error_reporting(E_ERROR | E_PARSE);
 //require_once("{$mainPosition}\bootstrap\Env.php");//require_once invoca no script. Forma de concatenar de forma inteligente variáveis com strings
 
 //$env = new Env();
