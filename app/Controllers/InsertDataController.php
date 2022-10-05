@@ -60,7 +60,7 @@ class InsertDataController extends AbstractControllers{
         }
 
         if(!$this->params['last_name']){
-            $this->$attrName = 'last_name';
+            $this->attrName = 'last_name';
             throw new \Exception('the last name is send in request');/*Usa barra por nao estar pondo no user*/
         }
     }
