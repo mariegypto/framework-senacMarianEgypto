@@ -4,34 +4,27 @@ namespace App\FrameworkTools\Implementation\Route;
 
 use App\FrameworkTools\ProcessServerElements;
 
-use App\Controllers\HelloWorldController;
+use App\FrameworkTools\Implementation\Route\GetTrait;
 
-use App\Controllers\TrainQueryController;
-
-use App\Controllers\InsertDataController;
+use App\FrameworkTools\Implementation\Route\PostTrait;
 
 class RouteProcess{
 
-    public static function execute(){
-        $processServerElements = ProcessServerElements::start();
-        $routeArray =[];
-        switch($processServerElements->getVerb()){
-            case'GET':
-                switch($processServerElements->getRoute()){
-                   case '/hello-world':
-                    return (new HelloWorldController)->execute(); 
-                   break;
+    use GetTrait;
+    use PostTrait;
 
-                   case '/train-query':
-                    return(new TrainQueryController)->execute();
-                    break;
-                }
+    private static $processServerElements;// classe estatica nao cria objetos dela
+
+    public static function execute(){
+        self::$processServerElements = ProcessServerElements::start();
+        $routeArray =[];
+
+        switch(self::$processServerElements->getVerb()){/*self vc faz uma referencia a propria classe de maneira estática, acessar funcoes estaticas*/
+            case'GET':
+                return self::get();                
             case 'POST':
-                switch($processServerElements->getRoute()){
-                    case '/insert-data':
-                     return (new InsertDataController)->exec();
-                    break;
-                 }
+                return self::post();
         }
     }
+
 }
