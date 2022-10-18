@@ -6,7 +6,7 @@ use App\Controllers\InsertDataController;
 
 trait PostTrait{/*parte de uma classe*/
 
-    private static function post(){
+    public static function post(){
         switch(self::$processServerElements->getRoute()){
             case '/insert-data':
                 return (new InsertDataController)->exec();

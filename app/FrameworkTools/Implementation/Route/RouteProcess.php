@@ -8,10 +8,13 @@ use App\FrameworkTools\Implementation\Route\GetTrait;
 
 use App\FrameworkTools\Implementation\Route\PostTrait;
 
+use App\FrameworkTools\Implementation\Route\PutTrait;
+
 class RouteProcess{
 
     use GetTrait;
     use PostTrait;
+    use PutTrait;
 
     private static $processServerElements;// classe estatica nao cria objetos dela
 
@@ -24,6 +27,8 @@ class RouteProcess{
                 return self::get();                
             case 'POST':
                 return self::post();
+            case 'PUT':
+                return self::put();
         }
     }
 

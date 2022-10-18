@@ -7,7 +7,7 @@ use App\Controllers\TrainQueryController;
 
 trait GetTrait{/*parte de uma classe*/
 
-    private static function get(){
+    public static function get(){
         switch(self::$processServerElements->getRoute()){
             case '/hello-world':
                 return (new HelloWorldController)->execute(); 
