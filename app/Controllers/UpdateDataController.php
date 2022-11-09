@@ -5,25 +5,24 @@ namespace App\Controllers;
 use App\FrameworkTools\Abstracts\Controllers\AbstractControllers;
 
 class UpdateDataController extends AbstractControllers {
-    
-    public function exec(){
+
+    public function exec() {
         $userId;
         $missingAttribute;
         $response = [
-            'succcess' => true
+            'success' => true
         ];
 
-        try{
-            
-            $requestVariables = $this -> processServerElements->getVariables();
+        try {
+            $requestsVariables = $this->processServerElements->getVariables();
 
-            if((!$requestVariables) || sizeof($requestVariables) === 0){
+            if ((!$requestsVariables) || (sizeof($requestsVariables) === 0)) {
                 $missingAttribute = 'variableIsEmpty';
-                throw new \Exception("You need to insert variables in URL");
+                throw new \Exception("You need to insert variables in url");
             }
 
-            foreach($requestVariables as $requestVariable){
-                if($requestVariable['name'] === 'userId'){
+            foreach ($requestsVariables as $requestVariable) {
+                if ($requestVariable['name']  === 'userId') {
                     $userId = $requestVariable['value'];
                 }
             }
@@ -34,27 +33,81 @@ class UpdateDataController extends AbstractControllers {
             }
 
             $users = $this->pdo->query("SELECT * FROM user WHERE id_user = '{$userId}';")
-            ->fetchAll();//Retorna um array com todas as linhas da consulta
+                ->fetchAll();
 
             if (sizeof($users) === 0) {
-                $missingAttribute = 'thisUserNotExist';
+                $missingAttribute = 'thisUserNoExist';
                 throw new \Exception("There is not record of this user in db");
             }
 
+            $params = $this->processServerElements->getInputJSONData();
 
-            $params = $this-> processServerElements->getInputJSONData();
+            if ((!$params) || sizeof($params) === 0) {
+                $missingAttribute = 'paramsNotExist';
+                throw new \Exception("You have to inform the params attr to update");
+            }
+
+            $updateStructureQuery = '';
+
+
+            foreach ($params as $key => $value) {
+                if (!in_array($key,['name','last_name','age'])) {
+                    $missingAttribute = "keyNotAcceptable";
+                    throw new \Exception($key);
+                }
+
+                if ($key === 'name') {
+                    $updateStructureQuery .= "name = :name,";//pega a query e concatena com ela mesma. Forma la no postman
+
+                }
+
+                if ($key === 'last_name') {
+
+                    $updateStructureQuery .= " last_name = :last_name,";
+
+                }
+
+                if ($key === 'age') {
+                    $updateStructureQuery .= "age = :age,";
+                }
+
+            }
+
+            //no final sempre sobra uma virgula
+
+            $newStringElementsSQL = substr($updateStructureQuery,0,-1);//marca onde começa e até onde vai. no caso -1 representa o ultimo caractere
+
+            /*$updateStringInArray = str_split($updateStructureQuery);//updateStructureQuery: retorna uma String, str_split pega a string e quebra num array de mini strings, onde cada letra é uma string
             
-            dd($params);
+            array_pop($updateStringInArray);//array_pop: remove a ultima posicao do array, que no caso é a virgula
 
-        }catch (\Exception $e) {
+            $newStringElementsSQL = implode($updateStringInArray);// implode: junta tud de volta*/
+
+            $sql = "UPDATE 
+                        user 
+                    SET
+                        {$newStringElementsSQL}
+                    WHERE
+                        id_user = {$userId}
+                    ";
+
+            $statement = $this->pdo->prepare($sql);//pdo vem da abstract controller. la se inicia o pdo passando uma String de configuração apr ao banco de dados
+            
+            $statement->execute([
+                ':name' => $params["name"],
+                ':last_name' => $params["last_name"],
+                ':age' => $params["age"]
+            ]);
+
+            
+        } catch (\Exception $e) {
             $response = [
-                'succcess' => false,
+                'success' => false,
                 'message' => $e->getMessage(),
-                'missingAttribute'=> $missingAttribute
+                'missingAttribute' => $missingAttribute
             ];
         }
-        
+
         view($response);
     }
-    
 }
