@@ -58,17 +58,17 @@ class UpdateDataController extends AbstractControllers {
 
                 if ($key === 'name') {
                     $updateStructureQuery .= "name = :name,";//pega a query e concatena com ela mesma. Forma la no postman
-
+                    $toStatement[':name'] = $value;
                 }
 
                 if ($key === 'last_name') {
-
                     $updateStructureQuery .= " last_name = :last_name,";
-
+                    $toStatement[':last_name'] = $value;
                 }
 
                 if ($key === 'age') {
                     $updateStructureQuery .= "age = :age,";
+                    $toStatement[':age'] = $value;
                 }
 
             }
@@ -93,11 +93,7 @@ class UpdateDataController extends AbstractControllers {
 
             $statement = $this->pdo->prepare($sql);//pdo vem da abstract controller. la se inicia o pdo passando uma String de configuração apr ao banco de dados
             
-            $statement->execute([
-                ':name' => $params["name"],
-                ':last_name' => $params["last_name"],
-                ':age' => $params["age"]
-            ]);
+            $statement->execute($toStatement);
 
             
         } catch (\Exception $e) {

@@ -10,11 +10,14 @@ use App\FrameworkTools\Implementation\Route\PostTrait;
 
 use App\FrameworkTools\Implementation\Route\PutTrait;
 
+use App\FrameworkTools\Implementation\Route\DeleteTrait;
+
 class RouteProcess{
 
     use GetTrait;
     use PostTrait;
     use PutTrait;
+    use DeleteTrait;
 
     private static $processServerElements;// classe estatica nao cria objetos dela
 
@@ -29,6 +32,8 @@ class RouteProcess{
                 return self::post();
             case 'PUT':
                 return self::put();
+            case 'DELETE':
+                return self::delete();
         }
     }
 
